@@ -21,6 +21,7 @@ RUN  \
      cd /go/src/github.com/minio/minio && \
      go install -v -ldflags "$(go run buildscripts/gen-ldflags.go)" && \
      rm -rf /go/pkg /go/src /usr/local/go && apk del .build-deps && \
+     mkdir /storage
      chgrp -Rf root /storage && \
      chmod -Rf g+w /storage && \
      chmod g+w /etc/passwd
