@@ -20,7 +20,11 @@ RUN  \
      go get -v -d github.com/minio/minio && \
      cd /go/src/github.com/minio/minio && \
      go install -v -ldflags "$(go run buildscripts/gen-ldflags.go)" && \
-     rm -rf /go/pkg /go/src /usr/local/go && apk del .build-deps
+     rm -rf /go/pkg /go/src /usr/local/go && apk del .build-deps && \
+     mkdir /home/builder && \
+     chgrp -Rf root /home/builder && \
+     chmod -Rf g+w /home/builder && \
+     chmod g+w /etc/passwd
 
 EXPOSE 9000
 

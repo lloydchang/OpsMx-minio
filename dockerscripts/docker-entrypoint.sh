@@ -21,6 +21,13 @@ if [ "${1}" != "minio" ]; then
         set -- minio "$@"
     fi
 fi
+# For Openshift. UID changing
+if [ `id -u` -ge 10000 ]; then
+    echo "builder:x:`id -u`:`id -g`:,,,:/home/builder:/bin/bash" >> /tmp/passwd
+    cat /tmp/passwd > /etc/passwd
+    rm /tmp/passwd
+fi
+
 
 ## Look for docker secrets in default documented location.
 docker_secrets_env() {
