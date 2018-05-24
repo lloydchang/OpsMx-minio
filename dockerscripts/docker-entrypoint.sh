@@ -22,6 +22,7 @@ if [ "${1}" != "minio" ]; then
     fi
 fi
 # For Openshift. UID changing
+cp /etc/passwd /tmp/passwd
 if [ `id -u` -ge 10000 ]; then
     echo "builder:x:`id -u`:`id -g`:,,,:/home/builder:/bin/bash" >> /tmp/passwd
     cat /tmp/passwd > /etc/passwd
